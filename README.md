@@ -1,4 +1,4 @@
-# cv_builder
+# CV builder
 
 A new Flutter project.
 
