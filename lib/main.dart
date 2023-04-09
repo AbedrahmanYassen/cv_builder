@@ -1,3 +1,4 @@
+import 'package:cv_builder/helpers/route_helper.dart';
 import 'package:cv_builder/routes/home.dart';
 import 'package:cv_builder/routes/on_boarding.dart';
 import 'package:docx_template/docx_template.dart';
@@ -19,7 +20,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      onGenerateRoute:RouteHelper.manageRoute,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,7 +35,6 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
     );
   }
 }

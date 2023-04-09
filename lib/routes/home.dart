@@ -71,7 +71,8 @@ class HomeScreen extends StatelessWidget {
                 );
                 Uint8List result =
                     await cvgenerator.generateResume(cvgenerator.data);
-                File file = File("example.pdf");
+                File file = File("generated_cvs/example_${cvgenerator.data.name.replaceAll(" ", "")}.pdf");
+
                 file.writeAsBytes(result);
               },
               style: ElevatedButton.styleFrom(

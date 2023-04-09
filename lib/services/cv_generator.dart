@@ -15,9 +15,6 @@ const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
 const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
 const sep = 120.0;
 
-// const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
-// const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
-// const sep = 120.0;
 class CVGenerator {
   UserData data;
 
@@ -200,7 +197,7 @@ class CVGenerator {
                     ),
                     _Block(
                       title:
-                      "${data.degrees[1].major} at the ${data.degrees[1].schoolName}",
+                          "${data.degrees[1].major} at the ${data.degrees[1].schoolName}",
                       details: data.degrees[1].details,
                     ),
                     // _Block(title: 'Bachelor Interior Design'),
@@ -278,8 +275,6 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
       bold: await PdfGoogleFonts.openSansBold(),
       icons: await PdfGoogleFonts.materialIcons(),
     ),
-
-
   );
 }
 
