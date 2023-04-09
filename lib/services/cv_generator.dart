@@ -44,64 +44,6 @@ class CVGenerator {
 
     Content c = Content();
     c..add(TextContent("Name", data.name));
-    // ..add(TextContent("phone", data.phoneNumber))
-    // ..add(TextContent("your_job", data.currentPosition))
-    // ..add(TextContent("Email", data.email))
-    // ..add(TextContent("first_skill", data.skills[0]))
-    // ..add(TextContent("second_skill", data.skills[1]));
-
-    // ..add(ListContent("list", [
-    //   TextContent("value", "Engine")
-    //     ..add(ListContent("listnested", contentList)),
-    //   TextContent("value", "Gearbox"),
-    //   TextContent("value", "Chassis")
-    // ]))
-    // ..add(ListContent("plainlist", [
-    //   PlainContent("plainview")
-    //     ..add(TableContent("table", [
-    //       RowContent()
-    //         ..add(TextContent("key1", "Paul"))
-    //         ..add(TextContent("key2", "Viberg"))
-    //         ..add(TextContent("key3", "Engineer")),
-    //       RowContent()
-    //         ..add(TextContent("key1", "Alex"))
-    //         ..add(TextContent("key2", "Houser"))
-    //         ..add(TextContent("key3", "CEO & Founder"))
-    //         ..add(ListContent("tablelist", [
-    //           TextContent("value", "Mercedes-Benz C-Class S205"),
-    //           TextContent("value", "Lexus LX 570")
-    //         ]))
-    //     ])),
-    //   PlainContent("plainview")
-    //     ..add(TableContent("table", [
-    //       RowContent()
-    //         ..add(TextContent("key1", "Nathan"))
-    //         ..add(TextContent("key2", "Anceaux"))
-    //         ..add(TextContent("key3", "Music artist"))
-    //         ..add(ListContent(
-    //             "tablelist", [TextContent("value", "Peugeot 508")])),
-    //       RowContent()
-    //         ..add(TextContent("key1", "Louis"))
-    //         ..add(TextContent("key2", "Houplain"))
-    //         ..add(TextContent("key3", "Music artist"))
-    //         ..add(ListContent("tablelist", [
-    //           TextContent("value", "Range Rover Velar"),
-    //           TextContent("value", "Lada Vesta SW Sport")
-    //         ]))
-    //     ])),
-    // ]))
-    // ..add(ListContent("multilineList", [
-    //   PlainContent("multilinePlain")
-    //     ..add(TextContent('multilineText', 'line 1')),
-    //   PlainContent("multilinePlain")
-    //     ..add(TextContent('multilineText', 'line 2')),
-    //   PlainContent("multilinePlain")
-    //     ..add(TextContent('multilineText', 'line 3'))
-    // ]))
-    // ..add(TextContent('multilineText2', 'line 1\nline 2\n line 3'));
-
-    // ..add(ImageContent('img', testFileContent));
-
     final d = await docx.generate(c);
     final of = File('assets/generated.docx');
     if (d != null) {
@@ -173,8 +115,6 @@ class CVGenerator {
                                   pw.Text(data.phoneNumber),
                                   _UrlText(data.email,
                                       'mailto:p.charlesbois@yahoo.com'),
-                                  // _UrlText('wholeprices.ca',
-                                  //     'https://wholeprices.ca'),
                                 ],
                               ),
                               pw.Padding(padding: pw.EdgeInsets.zero)
@@ -200,10 +140,9 @@ class CVGenerator {
                     ),
                     _Block(
                       title:
-                      "${data.degrees[1].major} at the ${data.degrees[1].schoolName}",
+                          "${data.degrees[1].major} at the ${data.degrees[1].schoolName}",
                       details: data.degrees[1].details,
                     ),
-                    // _Block(title: 'Bachelor Interior Design'),
                   ],
                 ),
               ),
@@ -241,13 +180,6 @@ class CVGenerator {
                                   title: pw.Text(data.skills[2])),
                             ],
                           ),
-                          // pw.BarcodeWidget(
-                          //   data: 'Abdelrhman Yaseen',
-                          //   width: 60,
-                          //   height: 60,
-                          //   barcode: pw.Barcode.qrCode(),
-                          //   drawText: false,
-                          // ),
                         ],
                       ),
                     ),
@@ -278,8 +210,6 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
       bold: await PdfGoogleFonts.openSansBold(),
       icons: await PdfGoogleFonts.materialIcons(),
     ),
-
-
   );
 }
 
@@ -429,11 +359,13 @@ class _UrlText extends pw.StatelessWidget {
   pw.Widget build(pw.Context context) {
     return pw.UrlLink(
       destination: url,
-      child: pw.Text(text,
-          style: const pw.TextStyle(
-            decoration: pw.TextDecoration.underline,
-            color: PdfColors.blue,
-          )),
+      child: pw.Text(
+        text,
+        style: const pw.TextStyle(
+          decoration: pw.TextDecoration.underline,
+          color: PdfColors.blue,
+        ),
+      ),
     );
   }
 }
