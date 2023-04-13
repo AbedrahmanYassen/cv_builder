@@ -36,49 +36,7 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () async {
                 CVGenerator cvgenerator = CVGenerator(
-                  // UserData(
-                    //   name: "Abdelrhman",
-                    //   phoneNumber: "0597501896",
-                    //   email: "abdrhman9@gmail.com",
-                    //   experiences: [
-                    //     Experience(
-                    //       jobTitle: "Flutter developer",
-                    //       details:
-                    //           "I worked at X company on an application called Y, and I helped building the user interfaces of the application",
-                    //     ),
-                    //     Experience(
-                    //       jobTitle: "Web developer",
-                    //       details:
-                    //           "I worked at Z company on building APIs for their product, and many back-end related tasks",
-                    //     ),
-                    //   ],
-                    //   skills: [
-                    //     Skill(skillName: "Flutter", value: 0.5, size: 60),
-                    //     Skill(skillName: "Flutter", value: 0.2, size: 60),
-                    //     Skill(skillName: "Flutter", value: 0.1, size: 60),
-                    //   ],
-                    //   degrees: [
-                    //     Education(
-                    //         "Islamic university",
-                    //         "location",
-                    //         "",
-                    //         "Computer Engineering",
-                    //         "",
-                    //         "At 2024 I finished my degree with X GPA"),
-                    //     Education(
-                    //         "Waterloo",
-                    //         "location",
-                    //         "",
-                    //         "Master in Computer Science",
-                    //         "",
-                    //         "At 2024 I finished my degree with X GPA")
-                    //   ],
-                    // ),
-                    );
-                // Uint8List result =
-                //     await cvgenerator.generateResume(cvgenerator.data);
-                // File file = File("example.pdf");
-                // file.writeAsBytes(result);
+
               },
               style: ElevatedButton.styleFrom(
                 padding:

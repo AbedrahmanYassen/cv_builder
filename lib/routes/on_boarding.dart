@@ -1,3 +1,4 @@
+import 'package:cv_builder/helpers/route_helper.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void _skip() {
-    Navigator.pushReplacementNamed(context, '/home');
+    Navigator.pushReplacementNamed(context, RouteHelper.homeRoute);
   }
 
   @override
@@ -98,19 +99,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ElevatedButton(
               onPressed: _currentIndex == _titles.length - 1 ? _skip : _nextPage,
-              child: Text(
-                _currentIndex == _titles.length - 1 ? 'Get Started' : 'Next',
-                style: TextStyle(fontSize: 18),
-              ),
               style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
+              child: Text(
+                _currentIndex == _titles.length - 1 ? 'Get Started' : 'Next',
+                style: TextStyle(fontSize: 18),
+              ),
             ),
             SizedBox(
               height: 20,

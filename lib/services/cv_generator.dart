@@ -15,9 +15,6 @@ const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
 const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
 const sep = 120.0;
 
-// const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
-// const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
-// const sep = 120.0;
 class CVGenerator {
   late UserData userData;
 
