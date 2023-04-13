@@ -1,4 +1,5 @@
 import 'package:cv_builder/models/education.dart';
+import 'package:cv_builder/models/skill.dart';
 
 import 'experience.dart';
 
@@ -10,7 +11,7 @@ class UserData {
   String phoneNumber;
   String email;
   List<Experience> experiences ;
-  List<String> skills ;
+  List<Skill> skills ;
   List<Education> degrees;
 
   UserData({
