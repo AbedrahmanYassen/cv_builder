@@ -19,8 +19,9 @@ const sep = 120.0;
 // const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
 // const sep = 120.0;
 class CVGenerator {
+  UserData data;
 
-  CVGenerator();
+  CVGenerator(this.data);
 
   Future<void> generateWordCV() async {
     File file = File("assets/resume_template.docx");
