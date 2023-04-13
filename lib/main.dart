@@ -1,6 +1,5 @@
 import 'package:cv_builder/routes/home.dart';
 import 'package:cv_builder/routes/on_boarding.dart';
-import 'package:cv_builder/routes/show_hide_screen.dart';
 import 'package:docx_template/docx_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -22,10 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      home: ShowHideScreen(),
+      home: HomeScreen(),
     );
   }
 }
