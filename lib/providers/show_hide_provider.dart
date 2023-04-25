@@ -17,7 +17,7 @@ class ShowHideProvider with ChangeNotifier {
     email: "",
     experiences: [],
     skills: [],
-    degrees: [],
+    degrees: [], languages: [], awards: [], currentPosition: '', city: '', street: '', country: '',
   );
 
   void handleShowingOrHiding(
@@ -80,14 +80,14 @@ class ShowHideProvider with ChangeNotifier {
     if (length != 0) {
       if (isChecked) {
         switch (dataFields) {
-          case DataFields.name:
-            userData.skills.add( value as Skill);
-            break;
           case DataFields.degrees:
             userData.degrees.add( value as Education);
             break;
           case DataFields.experiences:
             userData.experiences.add(value as Experience);
+            break;
+          case DataFields.skills:
+            userData.skills.add(value as Skill);
             break;
           default:
             userData = userData;
@@ -117,7 +117,7 @@ class ShowHideProvider with ChangeNotifier {
 
   Future<void> resumeGenerator() async {
     CVGenerator cvGenerator = CVGenerator();
-    Uint8List result = await cvGenerator.generateResume(userData);
+    Uint8List result = await cvGenerator.generateGoogleDocsLikeResume(userData);
     File file = File("example.pdf");
     file.writeAsBytes(result);
   }

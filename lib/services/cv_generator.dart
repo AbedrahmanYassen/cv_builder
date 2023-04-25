@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:docx_template/docx_template.dart';
@@ -9,7 +10,9 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:printing/printing.dart';
+import '../models/education.dart';
 import '../models/user_data.dart';
+import '../models/experience.dart';
 
 const PdfColor green = PdfColor.fromInt(0xff9ce5d0);
 const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
@@ -52,6 +55,170 @@ class CVGenerator {
     }
   }
 
+  Future<Uint8List> generateGoogleDocsLikeResume(UserData data) async {
+    final doc = pw.Document(
+        title: 'My Résumé', author: /*data.author*/ "Abdelrhman Yaseen");
+    final pageTheme = await _myPageTheme(PdfPageFormat.a4);
+
+    doc.addPage(
+      pw.MultiPage(
+        pageTheme: pageTheme,
+        build: (pw.Context context) {
+          return [
+            pw.Partitions(
+              children: [
+                pw.Partition(
+                  flex: 3,
+                  child: pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        data.name,
+                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 26,
+                            color: PdfColors.black),
+                      ),
+                      pw.Text(
+                        data.currentPosition,
+                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                            // fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                            color: PdfColors.black),
+                      ),
+                      pw.SizedBox(height: 30),
+                      if (data.experiences.isNotEmpty)
+                        pw.Text(
+                          "EXPERIENCE",
+                          style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                              fontWeight: pw.FontWeight.bold,
+                              fontSize: 9,
+                              color: PdfColors.blue400),
+                        ),
+                      pw.SizedBox(height: 10),
+                      pw.Column(
+                        children: List.generate(
+                          data.experiences.length,
+                          (index) => _Experience(
+                            experience: data.experiences[index],
+                          ),
+                        ),
+                      ),
+                      pw.SizedBox(height: 15),
+                      if (data.degrees.isNotEmpty)
+                        pw.Text(
+                          "Education",
+                          style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                              fontWeight: pw.FontWeight.bold,
+                              fontSize: 9,
+                              color: PdfColors.blue400),
+                        ),
+                      pw.SizedBox(height: 10),
+                      pw.Column(
+                        children: List.generate(
+                          data.degrees.length,
+                          (index) => _Education(
+                            education: data.degrees[index],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                pw.Partition(
+                  // width: 50,
+                  child: pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        "${data.street}\n${data.city}\n${data.phoneNumber}\n${data.email}",
+                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                            // fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                            color: PdfColors.black),
+                      ),
+                      pw.SizedBox(height: 30),
+                      pw.Text(
+                        "Skills",
+                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                            color: PdfColors.blue400),
+                      ),
+                      pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: List.generate(
+                          data.skills.length,
+                          (index) => pw.Padding(
+                            padding: const pw.EdgeInsets.only(top: 8),
+                            child: pw.Text(
+                              data.skills[index].skillName,
+                              style: pw.Theme.of(context)
+                                  .defaultTextStyle
+                                  .copyWith(
+                                    // fontWeight: pw.FontWeight.bold,
+                                    fontSize: 9,
+                                    color: PdfColors.grey,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Text(
+                        "Awards",
+                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                            color: PdfColors.blue400),
+                      ),
+                      pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: List.generate(
+                          5,
+                          (index) => pw.Padding(
+                            padding: const pw.EdgeInsets.only(top: 8),
+                            child: pw.Text(
+                              'the best eater with the biggest billy',
+                              style: pw.Theme.of(context)
+                                  .defaultTextStyle
+                                  .copyWith(
+                                    // fontWeight: pw.FontWeight.bold,
+                                    fontSize: 9,
+                                    color: PdfColors.grey,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Text(
+                        "Languages",
+                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                            color: PdfColors.blue400),
+                      ),
+                      pw.Text(
+                        "English,Arabic,French,Italian,Dutch,German",
+                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                            // fontWeight: pw.FontWeight.bold,
+                            fontSize: 8,
+                            color: PdfColors.black),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ];
+        },
+      ),
+    );
+    return doc.save();
+  }
+
   Future<Uint8List> generateResume(UserData data) async {
     final doc = pw.Document(
         title: 'My Résumé', author: /*data.author*/ "Abdelrhman Yaseen");
@@ -69,8 +236,8 @@ class CVGenerator {
           pw.Partitions(
             children: [
               pw.Partition(
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                child: pw.ListView(
+                  // crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: <pw.Widget>[
                     pw.Container(
                       padding: const pw.EdgeInsets.only(left: 30, bottom: 20),
@@ -110,8 +277,7 @@ class CVGenerator {
                                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                                 children: <pw.Widget>[
                                   pw.Text(data.phoneNumber),
-                                  _UrlText(data.email,
-                                      data.email),
+                                  _UrlText(data.email, data.email),
                                 ],
                               ),
                               pw.Padding(padding: pw.EdgeInsets.zero)
@@ -148,7 +314,7 @@ class CVGenerator {
               ),
               pw.Partition(
                 width: sep,
-                child: pw.Column(
+                child: pw.ListView(
                   children: [
                     pw.Container(
                       height: pageTheme.pageFormat.availableHeight,
@@ -206,6 +372,102 @@ Future<pw.PageTheme> _myPageTheme(PdfPageFormat format) async {
       icons: await PdfGoogleFonts.materialIcons(),
     ),
   );
+}
+
+class _Experience extends pw.StatelessWidget {
+  Experience experience;
+
+  _Experience({required this.experience});
+
+  @override
+  pw.Widget build(pw.Context context) {
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.SizedBox(height: 10),
+        pw.Row(children: [
+          pw.Text(
+            "${experience.companyName} ",
+            style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                fontWeight: pw.FontWeight.bold,
+                fontSize: 11,
+                color: PdfColors.black),
+          ),
+          pw.SizedBox(height: 7),
+          pw.Text(
+            "${experience.companyLocation}-${experience.jobTitle}",
+            style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                // fontWeight: pw.FontWeight.bold,
+                fontSize: 11,
+                color: PdfColors.black),
+          ),
+        ]),
+        pw.Text(
+          experience.period,
+          style: pw.Theme.of(context).defaultTextStyle.copyWith(
+              // fontWeight: pw.FontWeight.bold,
+              fontSize: 8,
+              color: PdfColors.grey),
+        ),
+        pw.SizedBox(height: 7),
+        pw.Text(
+          experience.details,
+          style: pw.Theme.of(context).defaultTextStyle.copyWith(
+              // fontWeight: pw.FontWeight.bold,
+              fontSize: 9,
+              color: PdfColors.grey),
+        ),
+      ],
+    );
+  }
+}
+
+class _Education extends pw.StatelessWidget {
+  Education education;
+
+  _Education({required this.education});
+
+  @override
+  pw.Widget build(pw.Context context) {
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Row(children: [
+          pw.Text(
+            "${education.schoolName} ",
+            style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                fontWeight: pw.FontWeight.bold,
+                fontSize: 11,
+                color: PdfColors.black),
+          ),
+          pw.SizedBox(height: 7),
+          pw.Text(
+            "${education.major}-${education.degree}",
+            style: pw.Theme.of(context).defaultTextStyle.copyWith(
+                // fontWeight: pw.FontWeight.bold,
+                fontSize: 11,
+                color: PdfColors.black),
+          ),
+          pw.SizedBox(height: 7),
+        ]),
+        pw.Text(
+          education.period,
+          style: pw.Theme.of(context).defaultTextStyle.copyWith(
+              // fontWeight: pw.FontWeight.bold,
+              fontSize: 8,
+              color: PdfColors.grey),
+        ),
+        pw.SizedBox(height: 7),
+        pw.Text(
+          education.details,
+          style: pw.Theme.of(context).defaultTextStyle.copyWith(
+              // fontWeight: pw.FontWeight.bold,
+              fontSize: 9,
+              color: PdfColors.grey),
+        ),
+      ],
+    );
+  }
 }
 
 class _Block extends pw.StatelessWidget {

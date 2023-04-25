@@ -35,8 +35,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                CVGenerator cvgenerator = CVGenerator(
-
+                CVGenerator cvgenerator = CVGenerator();
               },
               style: ElevatedButton.styleFrom(
                 padding:

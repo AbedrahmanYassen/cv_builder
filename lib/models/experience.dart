@@ -5,6 +5,6 @@ class Experience {
   String period;
   String details;
 
-  Experience({this.companyName = "", this.companyLocation = "", this.jobTitle="", this.period="",
-      this.details=""});
+  Experience({required this.companyName , required this.companyLocation , required this.jobTitle, required this.period,
+      required this.details});
 }

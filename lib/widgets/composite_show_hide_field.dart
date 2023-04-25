@@ -12,12 +12,14 @@ class CompositeShowHideField extends StatelessWidget {
       {Key? key, required this.dataFields, required this.fieldValues})
       : super(key: key);
 
-  bool isChecked = false;
+  List<bool> isChecked = [];
   List fieldValues;
   final DataFields dataFields;
 
   @override
   Widget build(BuildContext context) {
+    isChecked = List.filled(fieldValues.length, false);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -32,6 +34,7 @@ class CompositeShowHideField extends StatelessWidget {
           children: [
             const Text("Skills"),
             Consumer<ShowHideProvider>(builder: (_, provider, __) {
+
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,11 +62,11 @@ class CompositeShowHideField extends StatelessWidget {
                     children: [
                       Text(currentValue),
                       Checkbox(
-                        value: isChecked,
+                        value: isChecked[index],
                         onChanged: (v) {
-                          isChecked = v!;
+                          isChecked[index] = v!;
                           provider.handleShowingOrHidingForCompositeFields(
-                              isChecked, dataFields, fieldValues[index], index, fieldValues.length);
+                              isChecked[index], dataFields, fieldValues[index], index, fieldValues.length);
                         },
                       ),
                     ],

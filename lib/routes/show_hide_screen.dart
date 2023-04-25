@@ -22,19 +22,117 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
   @override
   Widget build(BuildContext context) {
     userData = UserData(
+        city: "Gaza Strip",
+        currentPosition: "Student",
         name: "Abdelrhman Yaseen",
         phoneNumber: "+597501896",
         email: "abdelrhmnYaseen@gmail.com",
         experiences: [
-          Experience(jobTitle: "Web developer", companyName: "Unit One"),
+
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
+          Experience(
+            jobTitle: "Web developer",
+            companyName: "Unit One",
+            companyLocation: 'Gaza',
+            period: '2023-PRESENT',
+            details:
+                'I was there as an intern, and I helped in many tasks from design user interfaces',
+          ),
         ],
         skills: [
           Skill(skillName: "Flutter development", value: 0.6, size: 50),
           Skill(skillName: "Web development", value: 0.6, size: 50),
+          Skill(skillName: "Web Scraping", value: 0.6, size: 50),
+          Skill(skillName: "MS office", value: 0.6, size: 50),
+          Skill(skillName: "Communication skills", value: 0.6, size: 50),
+          Skill(skillName: "Working under pressure", value: 0.6, size: 50),
+          Skill(skillName: "Blah Blah", value: 0.6, size: 50),
         ],
         degrees: [
-         Education("Waterloo", "Canda", "Master", "Computer Science", "", "details")
-        ]);
+          Education("Waterloo", "Canada", "Master", "Computer Science",
+              "2020-PRESENT", "details"),
+          Education("Waterloo", "Canada", "Master", "Computer Science",
+              "2020-PRESENT", "details"),
+          Education("Waterloo", "Canada", "Master", "Computer Science",
+              "2020-PRESENT", "details"),
+          Education("Waterloo", "Canada", "Master", "Computer Science",
+              "2020-PRESENT", "details"),
+          Education("Waterloo", "Canada", "Master", "Computer Science",
+              "2020-PRESENT", "details"),
+          Education("Waterloo", "Canada", "Master", "Computer Science",
+              "2020-PRESENT", "details"),
+        ], languages: ["French" , "Arabic" , "German"] ,awards: [], street: '', country: '');
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ShowHideProvider()),
