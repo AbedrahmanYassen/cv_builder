@@ -37,6 +37,8 @@ class _SingleValueShowHideFieldState extends State<SingleValueShowHideField> {
             children: [
               Text(widget.fieldValue),
               Checkbox(
+                checkColor: Colors.grey,
+                activeColor: Colors.black,
                 value: isChecked,
                 onChanged: (value) {
                   isChecked = value!;

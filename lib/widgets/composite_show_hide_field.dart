@@ -81,6 +81,8 @@ class CompositeShowHideField extends StatelessWidget {
                       Text(currentValue),
                       Checkbox(
                         value: isChecked[index],
+                        checkColor: Colors.grey,
+                        activeColor: Colors.black,
                         onChanged: (v) {
                           isChecked[index] = v!;
                           provider.handleShowingOrHidingForCompositeFields(

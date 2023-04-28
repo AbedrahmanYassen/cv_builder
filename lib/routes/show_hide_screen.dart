@@ -28,71 +28,6 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
         phoneNumber: "+597501896",
         email: "abdelrhmnYaseen@gmail.com",
         experiences: [
-
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
           Experience(
             jobTitle: "Web developer",
             companyName: "Unit One",
@@ -120,19 +55,22 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
           Skill(skillName: "Blah Blah", value: 0.6, size: 50),
         ],
         degrees: [
-          Education("Waterloo", "Canada", "Master", "Computer Science",
-              "2020-PRESENT", "details"),
-          Education("Waterloo", "Canada", "Master", "Computer Science",
-              "2020-PRESENT", "details"),
-          Education("Waterloo", "Canada", "Master", "Computer Science",
-              "2020-PRESENT", "details"),
-          Education("Waterloo", "Canada", "Master", "Computer Science",
-              "2020-PRESENT", "details"),
-          Education("Waterloo", "Canada", "Master", "Computer Science",
-              "2020-PRESENT", "details"),
-          Education("Waterloo", "Canada", "Master", "Computer Science",
-              "2020-PRESENT", "details"),
-        ], languages: ["French" , "Arabic" , "German"] ,awards: [], street: '', country: '');
+          Education("Islamic university of Gaza", "Palestine", "Bachelor",
+              "Computer Engineering", "2020-2025", ""),
+          Education(
+              "Sapienza",
+              "Italy",
+              "Master",
+              "Computer Science",
+              "2025-2026",
+              "I have finished a master degree from Sapienza university of Rome with a GPA 3.9"),
+          Education("Mohammed bin Zayed university for AI", "Canada", "phd",
+              "Data science", "2020-PRESENT", ""),
+        ],
+        languages: ["French", "Arabic", "German"],
+        awards: [],
+        street: '',
+        country: '');
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ShowHideProvider()),
@@ -146,67 +84,112 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                "Check the fields you want to show on your CV,Please",
+                "Mark the fields you want to appear on your CV",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
               ),
               const SizedBox(
                 height: 50,
               ),
-              Wrap(
-                children: [
-                  if (userData.name.isNotEmpty)
-                    SingleValueShowHideField(
-                      fieldValue: userData.name,
-                      dataFields: DataFields.name,
-                    ),
-                  if (userData.phoneNumber.isNotEmpty)
-                    SingleValueShowHideField(
-                      fieldValue: userData.phoneNumber,
-                      dataFields: DataFields.phoneNumber,
-                    ),
-                  if (userData.email.isNotEmpty)
-                    SingleValueShowHideField(
-                      fieldValue: userData.email,
-                      dataFields: DataFields.email,
-                    ),
-                  if (userData.city.isNotEmpty)
-                    SingleValueShowHideField(
-                      fieldValue: userData.city,
-                      dataFields: DataFields.city,
-                    ),
-                  if (userData.street.isNotEmpty)
-                    SingleValueShowHideField(
-                      fieldValue: userData.street,
-                      dataFields: DataFields.street,
-                    ),
-                  if (userData.currentPosition.isNotEmpty)
-                    SingleValueShowHideField(
-                      fieldValue: userData.currentPosition,
-                      dataFields: DataFields.currentPosition,
-                    ),
-                  if (userData.skills.isNotEmpty)
-                    CompositeShowHideField(
-                        dataFields: DataFields.skills,
-                        fieldValues: userData.skills),
-                  if (userData.degrees.isNotEmpty)
-                    CompositeShowHideField(
-                        dataFields: DataFields.degrees,
-                        fieldValues: userData.degrees),
-                  if (userData.skills.isNotEmpty)
-                    CompositeShowHideField(
-                        dataFields: DataFields.experiences,
-                        fieldValues: userData.experiences),
-                  Consumer<ShowHideProvider>(builder: (_, pro, __) {
-                    return Column(
+              ExpansionTile(
+                iconColor: Colors.black,
+                collapsedIconColor: Colors.black,
+                title: const Text(
+                  'Personal Information',
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+                children: <Widget>[
+                  ListTile(
+                      title: SizedBox(
+                    child: Wrap(
                       children: [
-                        Text(pro.getData().name),
+                        if (userData.name.isNotEmpty)
+                          SingleValueShowHideField(
+                            fieldValue: userData.name,
+                            dataFields: DataFields.name,
+                          ),
+                        if (userData.phoneNumber.isNotEmpty)
+                          SingleValueShowHideField(
+                            fieldValue: userData.phoneNumber,
+                            dataFields: DataFields.phoneNumber,
+                          ),
+                        if (userData.email.isNotEmpty)
+                          SingleValueShowHideField(
+                            fieldValue: userData.email,
+                            dataFields: DataFields.email,
+                          ),
+                        if (userData.city.isNotEmpty)
+                          SingleValueShowHideField(
+                            fieldValue: userData.city,
+                            dataFields: DataFields.city,
+                          ),
+                        if (userData.street.isNotEmpty)
+                          SingleValueShowHideField(
+                            fieldValue: userData.street,
+                            dataFields: DataFields.street,
+                          ),
+                        if (userData.currentPosition.isNotEmpty)
+                          SingleValueShowHideField(
+                            fieldValue: userData.currentPosition,
+                            dataFields: DataFields.currentPosition,
+                          ),
                       ],
-                    );
-                  })
+                    ),
+                  ))
+                ],
+              ),
+              ExpansionTile(
+                iconColor: Colors.black,
+                collapsedIconColor: Colors.black,
+                title: const Text(
+                  'Skills, Experience & Education',
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: SizedBox(
+                      // height: 50,
+                      child: Wrap(
+                        children: [
+                          Wrap(
+                            children: [
+                              if (userData.skills.isNotEmpty)
+                                CompositeShowHideField(
+                                    dataFields: DataFields.skills,
+                                    fieldValues: userData.skills),
+                              if (userData.degrees.isNotEmpty)
+                                CompositeShowHideField(
+                                    dataFields: DataFields.degrees,
+                                    fieldValues: userData.degrees),
+                              if (userData.skills.isNotEmpty)
+                                CompositeShowHideField(
+                                    dataFields: DataFields.experiences,
+                                    fieldValues: userData.experiences),
+                              Consumer<ShowHideProvider>(builder: (_, pro, __) {
+                                return Column(
+                                  children: [
+                                    Text(pro.getData().name),
+                                  ],
+                                );
+                              })
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(
-                height: 50,
+                height: 20,
               ),
               Consumer<ShowHideProvider>(builder: (_, provider, __) {
                 return Row(
@@ -215,15 +198,15 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                     ElevatedButton(
                       onPressed: () async {},
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 50, vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 50, vertical: 20),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          backgroundColor: Colors.black),
                       child: const Text(
                         'Go back',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                     ),
                     ElevatedButton(
@@ -236,10 +219,11 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
+                        backgroundColor: Colors.black,
                       ),
                       child: const Text(
                         'Create CV',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
                       ),
                     ),
                   ],
