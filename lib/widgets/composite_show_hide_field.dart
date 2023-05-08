@@ -57,7 +57,7 @@ class CompositeShowHideField extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(fieldValues.length, (index) {
-                  String currentValue = "";
+                  String? currentValue = "";
                   switch (dataFields) {
                     case DataFields.skills:
                       currentValue = (fieldValues[index] as Skill).skillName;
@@ -78,7 +78,7 @@ class CompositeShowHideField extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(currentValue),
+                      Text(currentValue!),
                       Checkbox(
                         value: isChecked[index],
                         checkColor: Colors.grey,

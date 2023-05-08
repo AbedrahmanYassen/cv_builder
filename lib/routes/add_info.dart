@@ -1,152 +1,215 @@
 // import 'package:ecommerce_app_training/providers/admin_related_providers/add_screen_manager.dart';
+import 'package:cv_builder/models/data_fields.dart';
+import 'package:cv_builder/models/education.dart';
 import 'package:cv_builder/models/experience.dart';
+import 'package:cv_builder/models/user_data.dart';
+import 'package:cv_builder/providers/add_screen_provider.dart';
+import 'package:cv_builder/providers/user_data_handler.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-class AddScreen extends StatefulWidget {
-  const AddScreen({Key? key}) : super(key: key);
+import '../models/skill.dart';
 
-  @override
-  _AddScreenState createState() => _AddScreenState();
-}
+class AddScreen extends StatelessWidget {
+  AddScreen({Key? key}) : super(key: key);
 
-class _AddScreenState extends State<AddScreen> {
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController priceController = new TextEditingController();
-  TextEditingController categoryController = new TextEditingController();
-  TextEditingController descriptionController = new TextEditingController();
-  TextEditingController brandController = new TextEditingController();
-  ExperienceEditingController experienceEditingController =
-      ExperienceEditingController(
-          companyName: TextEditingController(),
-          jopTitle: TextEditingController(),
-          period: TextEditingController(),
-          details: TextEditingController(),
-          companyLocation: TextEditingController());
-
-  @override
-  void dispose() {
-    super.dispose();
-    nameController.dispose();
-    priceController.dispose();
-    categoryController.dispose();
-    descriptionController.dispose();
-    brandController.dispose();
-  }
+  UserData data = UserData();
 
   @override
   Widget build(BuildContext context) {
-    // AddScreenManager addScreenManager =
-    // Provider.of<AddScreenManager>(context, listen: false);
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  // height: MediaQuery.of(context).size.height * 1.2,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: Colors.grey.shade200),
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        // width: 150,
-                        // height: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          // image: DecorationImage(
-                          //   image: AssetImage('assets/images/add.jpg'),
-                          // ),
-                        ),
-                      ),
-                      TextFieldForAddScreen(
-                        hintText: 'Name',
-                        height: 50,
-                        textEditingController: nameController,
-                      ),
-                      TextFieldForAddScreen(
-                        hintText: 'Phone number',
-                        height: 50,
-                        textEditingController: priceController,
-                      ),
-                      TextFieldForAddScreen(
-                        hintText: 'Email',
-                        height: 50,
-                        textEditingController: categoryController,
-                      ),
-                      TextFieldForAddScreen(
-                        hintText: 'Country',
-                        height: 50,
-                        textEditingController: descriptionController,
-                      ),
-                      TextFieldForAddScreen(
-                          textEditingController: brandController,
-                          height: 50,
-                          hintText: 'City'),
-                      TextFieldForAddScreen(
-                          textEditingController: brandController,
-                          height: 50,
-                          hintText: 'Current position'),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      MultiInputDataForms(
-                        listOfItems: [
-                          ExperienceWidget(
-                            width: 0.0,
-                            height: 50,
-                            data: Experience(
-                                companyName: '',
-                                companyLocation: '',
-                                jobTitle: '',
-                                period: '',
-                                details: ''),
-                            textEditingController: ExperienceEditingController(
-                                companyName: nameController,
-                                jopTitle: nameController,
-                                period: nameController,
-                                details: nameController,
-                                companyLocation: nameController),
+    //TODO: Get the data before continuing
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AddScreenProvider()),
+        ChangeNotifierProvider(create: (_) => UserDataHandlersProvider()),
+      ],
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child:
+                Consumer<UserDataHandlersProvider>(builder: (_, provider, __) {
+              provider.singleValueDataHandler(data);
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 30, right: 30, top: 50, bottom: 50),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      // height: MediaQuery.of(context).size.height * 1.2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.grey.shade200),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Fill your Information",
+                            style: TextStyle(
+                                fontSize: 35, fontWeight: FontWeight.w700),
                           ),
-                          ExperienceWidget(
-                            width: 0.0,
+                          if (kDebugMode)
+                            Column(
+                              children: List.generate(
+                                data.experiences.length,
+                                (index) => Container(
+                                  color: Colors.black,
+                                  padding: EdgeInsets.all(5),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        data.experiences[index].companyName,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                      Text(
+                                        data.experiences[index].jobTitle,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                      Text(
+                                        data.experiences.length.toString(),
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          TextFieldForAddScreen(
+                            hintText: (data.name == "") ? "Name" : data.name,
                             height: 50,
-                            data: Experience(
-                                companyName: '',
-                                companyLocation: '',
-                                jobTitle: '',
-                                period: '',
-                                details: ''),
-                            textEditingController: experienceEditingController,
+                            handler: provider.userDataHandlers.nameHandler,
+                          ),
+                          TextFieldForAddScreen(
+                            hintText: 'Phone number',
+                            height: 50,
+                            // textEditingController: priceController,
+                            handler:
+                                provider.userDataHandlers.phoneNumberHandler,
+                          ),
+                          TextFieldForAddScreen(
+                            hintText: 'Email',
+                            height: 50,
+                            handler: provider.userDataHandlers.emailHandler,
+                          ),
+                          TextFieldForAddScreen(
+                            hintText: 'Country',
+                            height: 50,
+                            handler: provider.userDataHandlers.countryHandler,
+                          ),
+                          TextFieldForAddScreen(
+                              handler: provider.userDataHandlers.cityHandler,
+                              height: 50,
+                              hintText: 'City'),
+                          TextFieldForAddScreen(
+                              handler: provider
+                                  .userDataHandlers.currentPositionHandler,
+                              height: 50,
+                              hintText: 'Current position'),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          MultiInputDataForms(
+                            listOfItems: List.generate(
+                              data.experiences.length,
+                              (index) => ExperienceWidget(
+                                width: 200,
+                                height: 40,
+                                experience: data.experiences[index],
+                                index: index,
+                                numberOfExperiences: data.experiences.length,
+                                data: data,
+                              ),
+                            ),
+                            title: 'Experience',
+                            dataFields: DataFields.experiences,
+                            data: data,
+                          ),
+                          MultiInputDataForms(
+                            listOfItems: List.generate(
+                              data.degrees.length,
+                              (index) => EducationWidget(
+                                width: 200,
+                                height: 40,
+                                education: data.degrees[index],
+                                data: data,
+                                index: index,
+                                numberOfExperiences: data.degrees.length,
+                              ),
+                            ),
+                            title: 'Education',
+                            dataFields: DataFields.degrees,
+                            data: data,
+                          ),
+                          MultiInputDataForms(
+                              listOfItems: List.generate(
+                                  data.skills.length,
+                                  (index) => SizedBox(
+                                        height: 40,
+                                        child: TextFieldForAddScreen(
+                                            height: 40,
+                                            hintText:
+                                                data.skills[index].skillName,
+                                            handler: (value) {
+                                              data.skills[index].skillName =
+                                                  value;
+                                            }),
+                                      )),
+                              title: "Skills",
+                              dataFields: DataFields.skills,
+                              data: data),
+                          MultiInputDataForms(
+                              listOfItems: List.generate(
+                                data.languages.length,
+                                (index) => TextFieldForAddScreen(
+                                  height: 40,
+                                  hintText: data.languages[index],
+                                  handler: (value) {
+                                    data.languages[index] = value;
+                                  },
+                                ),
+                              ),
+                              title: "Languages",
+                              dataFields: DataFields.languages,
+                              data: data),
+                          MultiInputDataForms(
+                              listOfItems: List.generate(
+                                data.languages.length,
+                                (index) => TextFieldForAddScreen(
+                                  height: 40,
+                                  hintText: data.awards[index],
+                                  handler: (value) {
+                                    data.awards[index] = value;
+                                  },
+                                ),
+                              ),
+                              title: "Awards",
+                              dataFields: DataFields.awards,
+                              data: data),
+                          DataUploaderToTheDatabase(
+                            function: () {
+                              provider.setState();
+                            },
                           )
                         ],
                       ),
-                      ImagePicker(),
-                      DataUploaderToTheDatabase(
-                        function: () {
-                          // addScreenManager.addUser(
-                          //     name: nameController.text,
-                          //     price: priceController.text,
-                          //     category: categoryController.text,
-                          //     description: descriptionController.text,
-                          //     brand: brandController.text,
-                          //     context: context);
-                          experienceEditingController.companyName.text =
-                              "Hello world";
-                        },
-                      )
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ],
+                ],
+              );
+            }),
           ),
         ),
       ),
@@ -156,110 +219,331 @@ class _AddScreenState extends State<AddScreen> {
 
 class MultiInputDataForms extends StatelessWidget {
   final List<Widget> listOfItems;
+  final String title;
+  final DataFields dataFields;
+  UserData data;
 
-  const MultiInputDataForms({Key? key, required this.listOfItems})
+  MultiInputDataForms(
+      {Key? key,
+      required this.listOfItems,
+      required this.title,
+      required this.dataFields,
+      required this.data})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "Experience",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
+    return Consumer<AddScreenProvider>(builder: (_, provider, __) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    late Widget defaultWidget;
+                    switch (dataFields) {
+                      case DataFields.experiences:
+                        data.experiences.add(Experience(
+                            companyName: "",
+                            companyLocation: "",
+                            jobTitle: "",
+                            period: "",
+                            details: ""));
+                        defaultWidget = ExperienceWidget(
+                          width: 200,
+                          height: 40,
+                          experience: Experience(
+                              companyName: 'companyName',
+                              companyLocation: 'companyLocation',
+                              jobTitle: 'jobTitle',
+                              period: 'period',
+                              details: 'details'),
+                          index: listOfItems.length,
+                          numberOfExperiences: listOfItems.length,
+                          data: data,
+                        );
+
+                        break;
+                      case DataFields.degrees:
+                        defaultWidget = EducationWidget(
+                          width: 200,
+                          height: 40,
+                          education: Education(),
+                          data: data,
+                          index: listOfItems.length,
+                          numberOfExperiences: listOfItems.length,
+                        );
+                        data.degrees.add(Education());
+                        break;
+                      case DataFields.skills:
+                        data.skills.add(Skill());
+                        defaultWidget = SizedBox(
+                          height: 50,
+                          width: 400,
+                          child: TextFieldForAddScreen(
+                              height: 40,
+                              width: double.infinity,
+                              hintText: "New skill",
+                              handler: (value) {
+                                data.skills[listOfItems.length - 1].skillName =
+                                    value;
+                              }),
+                        );
+                        break;
+                      case DataFields.languages:
+                        data.languages.add("");
+                        defaultWidget = SizedBox(
+                          height: 50,
+                          width: 400,
+                          child: TextFieldForAddScreen(
+                              height: 40,
+                              width: double.infinity,
+                              hintText: "Language",
+                              handler: (value) {
+                                data.languages[listOfItems.length - 1] = value;
+                              }),
+                        );
+                        break;
+                      case DataFields.awards:
+                        data.awards.add("");
+                        defaultWidget = SizedBox(
+                          height: 50,
+                          width: 400,
+                          child: TextFieldForAddScreen(
+                              height: 40,
+                              width: double.infinity,
+                              hintText: "Award",
+                              handler: (value) {
+                                data.awards[listOfItems.length - 1] = value;
+                              }),
+                        );
+                        break;
+
+                      default:
+                        defaultWidget = EducationWidget(
+                          width: 200,
+                          height: 50,
+                          education: Education(),
+                          data: data,
+                          index: listOfItems.length,
+                          numberOfExperiences: listOfItems.length,
+                        );
+                    }
+                    provider.addWidget(defaultWidget, listOfItems);
+                  },
+                  icon: const Icon(Icons.add),
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 400,
-          child: ListView(
+          SizedBox(
+            height: 200,
+            child: ListView(
               children: List.generate(
-                  listOfItems.length, (index) => listOfItems[index])),
-        ),
-      ],
-    );
+                listOfItems.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      listOfItems[index],
+                      IconButton(
+                        onPressed: () {
+                          provider.removeWidget(index, listOfItems);
+                          switch (dataFields) {
+                            case DataFields.awards:
+                              data.awards.removeAt(index);
+                              break;
+                            case DataFields.skills:
+                              data.skills.removeAt(index);
+                              break;
+                            case DataFields.languages:
+                              data.languages.removeAt(index);
+                              break;
+                            case DataFields.experiences:
+                              data.experiences.removeAt(index);
+                              break;
+                            case DataFields.degrees:
+                              data.degrees.removeAt(index);
+                              break;
+                            default:
+                              () => null;
+                          }
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    });
   }
 }
 
 class ExperienceWidget extends StatelessWidget {
-  Experience data;
-
+  Experience experience;
   double height;
-
   double width;
-  ExperienceEditingController textEditingController;
+  int index;
+  int numberOfExperiences;
+  ExperienceHandler experienceHandler = ExperienceHandler();
+  UserData data;
 
   ExperienceWidget(
       {Key? key,
       required this.width,
       required this.height,
-      required this.data,
-      required this.textEditingController})
+      required this.experience,
+      required this.index,
+      required this.numberOfExperiences,
+      required this.data})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: [
-        TextFieldForAddScreen(
-            textEditingController: textEditingController.companyName,
-            height: 30,
-            width: 200,
-            hintText: 'Company name'),
-        TextFieldForAddScreen(
-            textEditingController: textEditingController.companyLocation,
-            height: 30,
-            width: 200,
-            hintText: 'Jop title'),
-        TextFieldForAddScreen(
-            textEditingController: textEditingController.period,
-            height: 30,
-            width: 200,
-            hintText: 'period'),
-        TextFieldForAddScreen(
-            textEditingController: textEditingController.details,
-            height: 30,
-            width: 200,
-            hintText: 'Some details'),
-        const Divider()
-      ],
-    );
+    return Consumer<UserDataHandlersProvider>(builder: (_, provider, __) {
+      provider.experienceHandler(experienceHandler, index, numberOfExperiences,
+          data.experiences[index]);
+      return Wrap(
+        children: [
+          TextFieldForAddScreen(
+            height: height,
+            width: width,
+            hintText: 'Company name',
+            handler: experienceHandler.companyName,
+          ),
+          TextFieldForAddScreen(
+              height: height,
+              width: width,
+              hintText: 'Jop title',
+              handler: experienceHandler.jopTitle),
+          TextFieldForAddScreen(
+              // textEditingController: textEditingController.period,
+              height: height,
+              width: width,
+              hintText: 'period',
+              handler: experienceHandler.period),
+          TextFieldForAddScreen(
+              // textEditingController: textEditingController.details,
+              height: height,
+              width: width,
+              hintText: 'Some details',
+              handler: experienceHandler.details),
+          const Divider()
+        ],
+      );
+    });
   }
 }
 
-class ExperienceEditingController {
-  TextEditingController companyName;
+class EducationWidget extends StatelessWidget {
+  Education education;
 
-  ExperienceEditingController(
-      {required this.companyName,
-      required this.jopTitle,
-      required this.period,
-      required this.details,
-      required this.companyLocation});
+  double height;
 
-  TextEditingController jopTitle;
+  double width;
+  UserData data;
 
-  TextEditingController period;
+  int index;
 
-  TextEditingController details;
+  int numberOfExperiences;
+  EducationHandler educationHandler =
+      EducationHandler(); //TODO:should be replaced with Education handler
 
-  TextEditingController companyLocation;
+  EducationWidget(
+      {Key? key,
+      required this.width,
+      required this.height,
+      required this.education,
+      required this.data,
+      required this.index,
+      required this.numberOfExperiences})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UserDataHandlersProvider>(builder: (_, provider, __) {
+      provider.educationHandler(
+          educationHandler, index, numberOfExperiences, data.degrees[index]);
+      return Column(
+        children: [
+          Row(
+            children: [
+              TextFieldForAddScreen(
+                // textEditingController: textEditingController.companyName,
+                height: height,
+                width: width,
+                hintText: 'School name',
+                handler: educationHandler.schoolName,
+              ),
+              TextFieldForAddScreen(
+                  // textEditingController: textEditingController.companyLocation,
+                  height: height,
+                  width: width,
+                  hintText: 'Major',
+                  handler: educationHandler.major),
+              TextFieldForAddScreen(
+                  // textEditingController: textEditingController.period,
+                  height: height,
+                  width: width,
+                  hintText: 'Degree',
+                  handler: educationHandler.degree),
+              TextFieldForAddScreen(
+                  // textEditingController: textEditingController.period,
+                  height: height,
+                  width: width,
+                  hintText: 'Period',
+                  handler: educationHandler.period),
+              TextFieldForAddScreen(
+                  // textEditingController: textEditingController.period,
+                  height: height,
+                  width: width,
+                  hintText: 'Location',
+                  handler: educationHandler.location),
+            ],
+          ),
+          TextFieldForAddScreen(
+              // textEditingController: textEditingController.details,
+              height: height,
+              width: width * 3,
+              hintText: 'Some details',
+              handler: educationHandler.details),
+          const Divider()
+        ],
+      );
+    });
+  }
 }
 
 class TextFieldForAddScreen extends StatelessWidget {
-  final TextEditingController textEditingController;
+  // final TextEditingController textEditingController;
   final double width;
   final double height;
   final String hintText;
+  final Function(String) handler;
 
   const TextFieldForAddScreen(
-      {required this.textEditingController,
+      {/*required this.textEditingController,*/
       required this.height,
       this.width = double.infinity,
       required this.hintText,
+      required this.handler,
       Key? key})
       : super(key: key);
 
@@ -277,7 +561,8 @@ class TextFieldForAddScreen extends StatelessWidget {
           width: width,
           height: height,
           child: TextField(
-            controller: textEditingController,
+            // controller: textEditingController,
+            onChanged: handler,
             cursorColor: Colors.black,
             decoration: InputDecoration(
               hintText: hintText,
@@ -351,7 +636,7 @@ class DataUploaderToTheDatabase extends StatelessWidget {
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Text(
                 'Add',
                 style: TextStyle(fontSize: 20),

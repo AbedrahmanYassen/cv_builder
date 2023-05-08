@@ -1,7 +1,6 @@
 class Skill{
-    String skillName;
-    double value ;
-    double size ;
+    String skillName = "";
+    double value = 0.0;
+    double size = 0.0;
 
-    Skill({required this.skillName, required this.value, required this.size});
 }

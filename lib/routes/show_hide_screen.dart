@@ -21,56 +21,47 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
 
   @override
   Widget build(BuildContext context) {
-    userData = UserData(
-        city: "Gaza Strip",
-        currentPosition: "Student",
-        name: "Abdelrhman Yaseen",
-        phoneNumber: "+597501896",
-        email: "abdelrhmnYaseen@gmail.com",
-        experiences: [
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-          Experience(
-            jobTitle: "Web developer",
-            companyName: "Unit One",
-            companyLocation: 'Gaza',
-            period: '2023-PRESENT',
-            details:
-                'I was there as an intern, and I helped in many tasks from design user interfaces',
-          ),
-        ],
-        skills: [
-          Skill(skillName: "Flutter development", value: 0.6, size: 50),
-          Skill(skillName: "Web development", value: 0.6, size: 50),
-          Skill(skillName: "Web Scraping", value: 0.6, size: 50),
-          Skill(skillName: "MS office", value: 0.6, size: 50),
-          Skill(skillName: "Communication skills", value: 0.6, size: 50),
-          Skill(skillName: "Working under pressure", value: 0.6, size: 50),
-          Skill(skillName: "Blah Blah", value: 0.6, size: 50),
-        ],
-        degrees: [
-          Education("Islamic university of Gaza", "Palestine", "Bachelor",
-              "Computer Engineering", "2020-2025", ""),
-          Education(
-              "Sapienza",
-              "Italy",
-              "Master",
-              "Computer Science",
-              "2025-2026",
-              "I have finished a master degree from Sapienza university of Rome with a GPA 3.9"),
-          Education("Mohammed bin Zayed university for AI", "Canada", "phd",
-              "Data science", "2020-PRESENT", ""),
-        ],
-        languages: ["French", "Arabic", "German"],
-        awards: [],
-        street: '',
-        country: '');
+    userData = UserData();
+    userData.city = "Gaza Strip";
+    userData.currentPosition = "Student";
+    userData.name = "Abdelrhman Yaseen";
+    userData.email = "I don't know it, Sorry";
+    // name: "Abdelrhman Yaseen",
+    // phoneNumber: "+597501896",
+    // email: "abdelrhmnYaseen@gmail.com",
+    // experiences: [
+    // Experience(
+    // jobTitle: "Web developer",
+    // companyName: "Unit One",
+    // companyLocation: 'Gaza',
+    // period: '2023-PRESENT',
+    // details:
+    // 'I was there as an intern, and I helped in many tasks from design user interfaces',
+    // ),
+    // Experience(
+    // jobTitle: "Web developer",
+    // companyName: "Unit One",
+    // companyLocation: 'Gaza',
+    // period: '2023-PRESENT',
+    // details:
+    // 'I was there as an intern, and I helped in many tasks from design user interfaces',
+    // ),
+    // ],
+    // skills: [
+    // Skill(skillName: "Flutter development", value: 0.6, size: 50),
+    // Skill(skillName: "Web development", value: 0.6, size: 50),
+    // Skill(skillName: "Web Scraping", value: 0.6, size: 50),
+    // Skill(skillName: "MS office", value: 0.6, size: 50),
+    // Skill(skillName: "Communication skills", value: 0.6, size: 50),
+    // Skill(skillName: "Working under pressure", value: 0.6, size: 50),
+    // Skill(skillName: "Blah Blah", value: 0.6, size: 50),
+    // ],
+    // degrees: [
+    // ],
+    // languages: ["French", "Arabic", "German"],
+    // awards: [],
+    // street: '',
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ShowHideProvider()),
@@ -151,6 +142,41 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                       color: Colors.black),
                 ),
                 children: <Widget>[
+                  ListTile(
+                    title: SizedBox(
+                      // height: 50,
+                      child: Wrap(
+                        children: [
+                          Wrap(
+                            children: [
+                              if (userData.skills.isNotEmpty)
+                                CompositeShowHideField(
+                                    dataFields: DataFields.skills,
+                                    fieldValues: userData.skills),
+                              if (userData.degrees.isNotEmpty)
+                                CompositeShowHideField(
+                                    dataFields: DataFields.degrees,
+                                    fieldValues: userData.degrees),
+                              if (userData.skills.isNotEmpty)
+                                CompositeShowHideField(
+                                    dataFields: DataFields.experiences,
+                                    fieldValues: userData.experiences),
+                              Consumer<ShowHideProvider>(builder: (_, pro, __) {
+                                return Column(
+                                  children: [
+                                    Text(pro.getData().name),
+                                  ],
+                                );
+                              })
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   ListTile(
                     title: SizedBox(
                       // height: 50,

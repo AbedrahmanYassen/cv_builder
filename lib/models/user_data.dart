@@ -5,31 +5,18 @@ import 'award.dart';
 import 'experience.dart';
 
 class UserData {
-  String name;
-  String currentPosition;
-  String city;
-  String street;
-  String phoneNumber;
-  String email;
-  List<Experience> experiences;
-  List<Skill> skills;
-  List<Education> degrees;
-  List<String> languages;
-  List<Award> awards;
+  late String name = "";
 
-  String country;
+  String currentPosition = "";
+  String city = "";
+  String street = "";
+  String phoneNumber = "";
+  String email = "";
+  List<Experience> experiences = [];
+  List<Skill> skills = [];
+  List<Education> degrees = [];
+  List<String> languages = [];
+  List<String> awards = [];
 
-  UserData(
-      {required this.name,
-      required this.currentPosition,
-      required this.city,
-      required this.street,
-      required this.phoneNumber,
-      required this.email,
-      required this.experiences,
-      required this.skills,
-      required this.degrees,
-      required this.languages,
-      required this.awards,
-      required this.country});
+  String country = "";
 }

@@ -12,12 +12,7 @@ import '../models/skill.dart';
 
 class ShowHideProvider with ChangeNotifier {
   UserData userData = UserData(
-    name: "",
-    phoneNumber: "",
-    email: "",
-    experiences: [],
-    skills: [],
-    degrees: [], languages: [], awards: [], currentPosition: '', city: '', street: '', country: '',
+
   );
 
   void handleShowingOrHiding(

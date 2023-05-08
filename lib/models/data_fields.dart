@@ -1,4 +1,4 @@
-enum DataFields{
+enum DataFields {
   name,
   phoneNumber,
   email,
@@ -7,5 +7,8 @@ enum DataFields{
   experiences,
   city,
   currentPosition,
-  street
+  street,
+  country,
+  languages,
+  awards
 }

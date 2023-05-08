@@ -1,13 +1,11 @@
 class Education {
-  String schoolName ;
-  String location ;
-  String degree;
-  String major;
-  String period ;
-  String details ;
+  String schoolName = "" ;
+  String location = "" ;
 
-  Education(this.schoolName, this.location, this.degree, this.major,
-      this.period, this.details);
+  String degree = "";
+  String major = "";
+  String period  = "" ;
+  String details = "" ;
 }
 /*
 Education:

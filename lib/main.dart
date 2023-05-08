@@ -10,8 +10,7 @@ import 'dart:typed_data';
 import 'package:http/http.dart';
 import 'package:universal_io/io.dart';
 
-void main() async{
-
+void main() async {
   runApp(const MyApp());
 }
 
@@ -26,9 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ShowHideScreen(),
-
+      home: AddScreen(),
     );
   }
 }
-
