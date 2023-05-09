@@ -11,4 +11,7 @@ class AddScreenProvider with ChangeNotifier {
     list.add(defaultWidget);
     notifyListeners();
   }
+  void setState(){
+    notifyListeners();
+  }
 }

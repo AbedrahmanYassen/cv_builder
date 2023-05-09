@@ -11,9 +11,7 @@ import 'package:flutter/cupertino.dart';
 import '../models/skill.dart';
 
 class ShowHideProvider with ChangeNotifier {
-  UserData userData = UserData(
-
-  );
+  UserData userData = UserData();
 
   void handleShowingOrHiding(
       bool isChecked, DataFields dataFields, String value) {
@@ -76,7 +74,7 @@ class ShowHideProvider with ChangeNotifier {
       if (isChecked) {
         switch (dataFields) {
           case DataFields.degrees:
-            userData.degrees.add( value as Education);
+            userData.degrees.add(value as Education);
             break;
           case DataFields.experiences:
             userData.experiences.add(value as Experience);
@@ -84,19 +82,32 @@ class ShowHideProvider with ChangeNotifier {
           case DataFields.skills:
             userData.skills.add(value as Skill);
             break;
+          case DataFields.awards:
+            userData.awards.add(value);
+            break;
+          case DataFields.languages:
+            userData.languages.add(value);
+            break;
+
           default:
             userData = userData;
         }
       } else {
         switch (dataFields) {
           case DataFields.skills:
-            userData.skills.clear();
+            userData.skills.removeAt(index);
             break;
           case DataFields.degrees:
-            userData.degrees.clear();
+            userData.degrees.removeAt(index);
             break;
           case DataFields.experiences:
-            userData.experiences.clear();
+            userData.experiences.removeAt(index);
+            break;
+          case DataFields.awards:
+            userData.awards.removeAt(index);
+            break;
+          case DataFields.languages:
+            userData.languages.removeAt(index);
             break;
           default:
             userData = userData;

@@ -350,44 +350,48 @@ class MultiInputDataForms extends StatelessWidget {
           ),
           SizedBox(
             height: 200,
-            child: ListView(
-              children: List.generate(
-                listOfItems.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      listOfItems[index],
-                      IconButton(
-                        onPressed: () {
-                          provider.removeWidget(index, listOfItems);
-                          switch (dataFields) {
-                            case DataFields.awards:
-                              data.awards.removeAt(index);
-                              break;
-                            case DataFields.skills:
-                              data.skills.removeAt(index);
-                              break;
-                            case DataFields.languages:
-                              data.languages.removeAt(index);
-                              break;
-                            case DataFields.experiences:
-                              data.experiences.removeAt(index);
-                              break;
-                            case DataFields.degrees:
-                              data.degrees.removeAt(index);
-                              break;
-                            default:
-                              () => null;
-                          }
-                        },
-                        icon: const Icon(Icons.delete),
-                      ),
-                    ],
+            child: ListView.builder(
+              itemCount: listOfItems.length,
+              itemBuilder: (BuildContext context, int index) {
+                List<String> keys = List.generate(
+                    listOfItems.length, (index) => "key$index$dataFields");
+                debugPrint(keys[0]);
+                return Dismissible(
+                  key: Key(keys[index]),
+                  onDismissed: (direction) {
+                    // keys.removeAt(index);
+                    switch (dataFields) {
+                      case DataFields.awards:
+                        data.awards.removeAt(index);
+                        break;
+                      case DataFields.skills:
+                        data.skills.removeAt(index);
+                        break;
+                      case DataFields.languages:
+                        data.languages.removeAt(index);
+                        break;
+                      case DataFields.experiences:
+                        data.experiences.removeAt(index);
+                        break;
+                      case DataFields.degrees:
+                        data.degrees.removeAt(index);
+                        break;
+                      default:
+                        () => null;
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        listOfItems[index],
+
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],

@@ -147,32 +147,18 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                       // height: 50,
                       child: Wrap(
                         children: [
-                          Wrap(
-                            children: [
-                              if (userData.skills.isNotEmpty)
-                                CompositeShowHideField(
-                                    dataFields: DataFields.skills,
-                                    fieldValues: userData.skills),
-                              if (userData.degrees.isNotEmpty)
-                                CompositeShowHideField(
-                                    dataFields: DataFields.degrees,
-                                    fieldValues: userData.degrees),
-                              if (userData.skills.isNotEmpty)
-                                CompositeShowHideField(
-                                    dataFields: DataFields.experiences,
-                                    fieldValues: userData.experiences),
-                              Consumer<ShowHideProvider>(builder: (_, pro, __) {
-                                return Column(
-                                  children: [
-                                    Text(pro.getData().name),
-                                  ],
-                                );
-                              })
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
+                          if (userData.skills.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.skills,
+                                fieldValues: userData.skills),
+                          if (userData.degrees.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.degrees,
+                                fieldValues: userData.degrees),
+                          if (userData.skills.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.experiences,
+                                fieldValues: userData.experiences),
                         ],
                       ),
                     ),
@@ -182,32 +168,69 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                       // height: 50,
                       child: Wrap(
                         children: [
-                          Wrap(
-                            children: [
-                              if (userData.skills.isNotEmpty)
-                                CompositeShowHideField(
-                                    dataFields: DataFields.skills,
-                                    fieldValues: userData.skills),
-                              if (userData.degrees.isNotEmpty)
-                                CompositeShowHideField(
-                                    dataFields: DataFields.degrees,
-                                    fieldValues: userData.degrees),
-                              if (userData.skills.isNotEmpty)
-                                CompositeShowHideField(
-                                    dataFields: DataFields.experiences,
-                                    fieldValues: userData.experiences),
-                              Consumer<ShowHideProvider>(builder: (_, pro, __) {
-                                return Column(
-                                  children: [
-                                    Text(pro.getData().name),
-                                  ],
-                                );
-                              })
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
+                          if (userData.skills.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.skills,
+                                fieldValues: userData.skills),
+                          if (userData.degrees.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.degrees,
+                                fieldValues: userData.degrees),
+                          if (userData.skills.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.experiences,
+                                fieldValues: userData.experiences),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              ExpansionTile(
+                iconColor: Colors.black,
+                collapsedIconColor: Colors.black,
+                title: const Text(
+                  'Languages & Awards',
+                  style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: SizedBox(
+                      // height: 50,
+                      child: Wrap(
+                        children: [
+                          if (userData.languages.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.languages,
+                                fieldValues: userData.languages),
+                          if (userData.awards.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.awards,
+                                fieldValues: userData.awards),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    title: SizedBox(
+                      // height: 50,
+                      child: Wrap(
+                        children: [
+                          if (userData.skills.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.skills,
+                                fieldValues: userData.skills),
+                          if (userData.degrees.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.degrees,
+                                fieldValues: userData.degrees),
+                          if (userData.skills.isNotEmpty)
+                            CompositeShowHideField(
+                                dataFields: DataFields.experiences,
+                                fieldValues: userData.experiences),
                         ],
                       ),
                     ),
