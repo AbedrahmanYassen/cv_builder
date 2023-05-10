@@ -1,121 +1,175 @@
+//import 'package:final_ahmed/pages/messages.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatelessWidget {
+import '../splash/splash_screen.dart';
+
+class Sign_Up extends StatelessWidget {
+  const Sign_Up({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Create an account',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+        body: Center(
+          child: Stack(children: [
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/dark_sign_in.png"),
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(height: 16.0),
-                Text(
-                  'Get started by entering your details below.',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.grey[600],
-                  ),
-                ),
-                SizedBox(height: 32.0),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Full Name',
-                    labelStyle: TextStyle(
-                      color: Colors.grey[600],
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(
-                      color: Colors.grey[600],
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                      color: Colors.grey[600],
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 32.0),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('SIGN UP'),
-                  ),
-                ),
-                SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Already have an account? ',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // navigate to login screen
-                      },
-                      child: Text(
-                        'Log In',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
-    );
+            Positioned(
+                top: 90,
+                left: 40,
+                child: Container(
+                  child: Text(
+                    "Sing up",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )),
+            Positioned(
+                top: 200,
+                left: 40,
+                child: Container(
+                  child: Column(
+                    children: [
+                      Container(
+                          width: 300,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Name",
+                              hintStyle: TextStyle(color: Color(0xff646781)),
+                            ),
+                          )),
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 18),
+                          width: 300,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Email",
+                              hintStyle: TextStyle(color: Color(0xff646781)),
+                            ),
+                          )),
+                      Container(
+                          width: 300,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Mopile Number",
+                              hintStyle: TextStyle(color: Color(0xff646781)),
+                            ),
+                          )),
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 22),
+                          width: 300,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Paasword",
+                              hintStyle: TextStyle(color: Color(0xff646781)),
+                            ),
+                          )),
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          width: 300,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Country",
+                              hintStyle: TextStyle(color: Color(0xff646781)),
+                            ),
+                          )),
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          width: 300,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "City",
+                              hintStyle: TextStyle(color: Color(0xff646781)),
+                            ),
+                          )),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            children: [
+                              Text(
+                                'By creating account, you agree to Fitclub ',
+                                textScaleFactor: 1,
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255),
+                                    fontSize: 14),
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: Text(
+                                  'Privacy',
+                                  style: TextStyle(
+                                      color: Color(0xffDF4C3B), fontSize: 14),
+                                ),
+                              )
+                            ],
+                          )),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              'Policy ',
+                              style:
+                              TextStyle(color: Color(0xffDF4C3B), fontSize: 14),
+                            ),
+                          ),
+                          Text(
+                            'and ',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                fontSize: 14),
+                          ),
+                          Text(
+                            'Terms of Use ',
+                            style:
+                            TextStyle(color: Color(0xffDF4C3B), fontSize: 14),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )),
+            Positioned(
+              top: 690,
+              left: 30,
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => SplashScreen()));
+                },
+                child: Positioned(
+                    top: 690,
+                    left: 30,
+                    child: Stack(
+                      children: [
+                        Container(child: Image.asset('images/ret.png')),
+                        Positioned(
+                          top: 15,
+                          left: 125,
+                          child: Container(
+                              child: Text(
+                                'Sign up',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
+                              )),
+                        )
+                      ],
+                    )),
+              ),
+            )
+          ]),
+        ));
   }
 }

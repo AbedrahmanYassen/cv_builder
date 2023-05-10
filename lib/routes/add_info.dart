@@ -252,15 +252,17 @@ class MultiInputDataForms extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    late Widget defaultWidget;
+                    Widget defaultWidget;
                     switch (dataFields) {
                       case DataFields.experiences:
-                        data.experiences.add(Experience(
-                            companyName: "",
-                            companyLocation: "",
-                            jobTitle: "",
-                            period: "",
-                            details: ""));
+                        data.experiences.add(
+                          Experience(
+                              companyName: "",
+                              companyLocation: "",
+                              jobTitle: "",
+                              period: "",
+                              details: ""),
+                        );
                         defaultWidget = ExperienceWidget(
                           width: 200,
                           height: 40,
@@ -274,7 +276,6 @@ class MultiInputDataForms extends StatelessWidget {
                           numberOfExperiences: listOfItems.length,
                           data: data,
                         );
-
                         break;
                       case DataFields.degrees:
                         defaultWidget = EducationWidget(
@@ -330,7 +331,6 @@ class MultiInputDataForms extends StatelessWidget {
                               }),
                         );
                         break;
-
                       default:
                         defaultWidget = EducationWidget(
                           width: 200,
@@ -353,13 +353,10 @@ class MultiInputDataForms extends StatelessWidget {
             child: ListView.builder(
               itemCount: listOfItems.length,
               itemBuilder: (BuildContext context, int index) {
-                List<String> keys = List.generate(
-                    listOfItems.length, (index) => "key$index$dataFields");
-                debugPrint(keys[0]);
                 return Dismissible(
-                  key: Key(keys[index]),
+                  key: UniqueKey(),
                   onDismissed: (direction) {
-                    // keys.removeAt(index);
+                    listOfItems.removeAt(index);
                     switch (dataFields) {
                       case DataFields.awards:
                         data.awards.removeAt(index);
@@ -386,7 +383,6 @@ class MultiInputDataForms extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         listOfItems[index],
-
                       ],
                     ),
                   ),
@@ -559,8 +555,9 @@ class TextFieldForAddScreen extends StatelessWidget {
         height: height,
         // width: width,
         decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(35)),
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: SizedBox(
           width: width,
           height: height,
@@ -571,15 +568,17 @@ class TextFieldForAddScreen extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade100,
-                  ),
-                  borderRadius: BorderRadius.circular(35)),
+                borderSide: BorderSide(
+                  color: Colors.grey.shade100,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
               focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade100,
-                  ),
-                  borderRadius: BorderRadius.circular(35)),
+                borderSide: BorderSide(
+                  color: Colors.grey.shade100,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
         ),
@@ -602,7 +601,7 @@ class ImagePicker extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             primary: Colors.grey.shade400,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
           onPressed: () {},
@@ -632,7 +631,7 @@ class DataUploaderToTheDatabase extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             primary: Colors.grey.shade400,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35),
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
           onPressed: () {

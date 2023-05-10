@@ -19,7 +19,6 @@ const PdfColor lightGreen = PdfColor.fromInt(0xffcdf1e7);
 const sep = 120.0;
 
 class CVGenerator {
-  late UserData userData;
 
   CVGenerator();
 
@@ -176,11 +175,11 @@ class CVGenerator {
                       pw.Column(
                         crossAxisAlignment: pw.CrossAxisAlignment.start,
                         children: List.generate(
-                          5,
+                          data.awards.length,
                           (index) => pw.Padding(
                             padding: const pw.EdgeInsets.only(top: 8),
                             child: pw.Text(
-                              'the best eater with the biggest billy',
+                              data.awards[index],
                               style: pw.Theme.of(context)
                                   .defaultTextStyle
                                   .copyWith(
@@ -200,12 +199,18 @@ class CVGenerator {
                             fontSize: 9,
                             color: PdfColors.blue400),
                       ),
-                      pw.Text(
-                        "English,Arabic,French,Italian,Dutch,German",
-                        style: pw.Theme.of(context).defaultTextStyle.copyWith(
-                            // fontWeight: pw.FontWeight.bold,
-                            fontSize: 8,
-                            color: PdfColors.black),
+                      pw.Wrap(
+                        children: List.generate(
+                          data.languages.length,
+                          (index) => pw.Text(
+                            data.languages[index],
+                            style:
+                                pw.Theme.of(context).defaultTextStyle.copyWith(
+                                    // fontWeight: pw.FontWeight.bold,
+                                    fontSize: 8,
+                                    color: PdfColors.black),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -306,7 +311,7 @@ class CVGenerator {
                       (index) => _Block(
                         title:
                             "${data.degrees[index].major} at the ${data.degrees[index].schoolName}",
-                        details: data.degrees[index].details??'',
+                        details: data.degrees[index].details ?? '',
                       ),
                     ))
                   ],
@@ -451,7 +456,7 @@ class _Education extends pw.StatelessWidget {
           pw.SizedBox(height: 7),
         ]),
         pw.Text(
-          education.period??'',
+          education.period ?? '',
           style: pw.Theme.of(context).defaultTextStyle.copyWith(
               // fontWeight: pw.FontWeight.bold,
               fontSize: 8,
@@ -459,7 +464,7 @@ class _Education extends pw.StatelessWidget {
         ),
         pw.SizedBox(height: 7),
         pw.Text(
-          education.details??'',
+          education.details ?? '',
           style: pw.Theme.of(context).defaultTextStyle.copyWith(
               // fontWeight: pw.FontWeight.bold,
               fontSize: 9,

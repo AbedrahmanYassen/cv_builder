@@ -1,9 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:cv_builder/models/data_fields.dart';
 import 'package:cv_builder/models/education.dart';
 import 'package:cv_builder/models/experience.dart';
 import 'package:cv_builder/models/skill.dart';
 import 'package:cv_builder/models/user_data.dart';
 import 'package:cv_builder/providers/show_hide_provider.dart';
+import 'package:cv_builder/services/cv_generator.dart';
 import 'package:cv_builder/widgets/composite_show_hide_field.dart';
 import 'package:cv_builder/widgets/single_value_show_hide_field.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +28,46 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
     userData.city = "Gaza Strip";
     userData.currentPosition = "Student";
     userData.name = "Abdelrhman Yaseen";
-    userData.email = "I don't know it, Sorry";
+    userData.email = "example@gmail.com";
+    userData.phoneNumber = "0597501896";
+    userData.skills = [
+      Skill()..skillName = "Flutter development",
+      Skill()..skillName = "Web development",
+      Skill()..skillName = "Web scraping"
+    ];
+    userData.awards = [
+      "First place at Hackathon X",
+      "The best research paper",
+      "the best employee"
+    ];
+    userData.languages = ["English", "French", "Arabic"];
+    userData.experiences = [
+      Experience(
+          companyName: "Google",
+          companyLocation: "USA",
+          jobTitle: "ML Engineer",
+          period: "2020-Present",
+          details: ""),
+      Experience(
+          companyName: "UnitOne",
+          companyLocation: "Gaza",
+          jobTitle: "Software Engineer",
+          period: "2019-2020",
+          details: "")
+    ];
+    userData.degrees = [
+      Education()
+        ..schoolName = "Islamic university of Gaza"
+        ..degree = "Bachelor"
+        ..location = "Palestine"
+        ..major = "Computer Engineering",
+      Education()
+        ..schoolName = "Oxford University"
+        ..degree = "Master"
+        ..location = "UK"
+        ..major = "Computer Engineering"
+    ];
+
     // name: "Abdelrhman Yaseen",
     // phoneNumber: "+597501896",
     // email: "abdelrhmnYaseen@gmail.com",
@@ -163,27 +205,6 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                       ),
                     ),
                   ),
-                  ListTile(
-                    title: SizedBox(
-                      // height: 50,
-                      child: Wrap(
-                        children: [
-                          if (userData.skills.isNotEmpty)
-                            CompositeShowHideField(
-                                dataFields: DataFields.skills,
-                                fieldValues: userData.skills),
-                          if (userData.degrees.isNotEmpty)
-                            CompositeShowHideField(
-                                dataFields: DataFields.degrees,
-                                fieldValues: userData.degrees),
-                          if (userData.skills.isNotEmpty)
-                            CompositeShowHideField(
-                                dataFields: DataFields.experiences,
-                                fieldValues: userData.experiences),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
               ExpansionTile(
@@ -214,27 +235,7 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                       ),
                     ),
                   ),
-                  ListTile(
-                    title: SizedBox(
-                      // height: 50,
-                      child: Wrap(
-                        children: [
-                          if (userData.skills.isNotEmpty)
-                            CompositeShowHideField(
-                                dataFields: DataFields.skills,
-                                fieldValues: userData.skills),
-                          if (userData.degrees.isNotEmpty)
-                            CompositeShowHideField(
-                                dataFields: DataFields.degrees,
-                                fieldValues: userData.degrees),
-                          if (userData.skills.isNotEmpty)
-                            CompositeShowHideField(
-                                dataFields: DataFields.experiences,
-                                fieldValues: userData.experiences),
-                        ],
-                      ),
-                    ),
-                  ),
+
                 ],
               ),
               const SizedBox(
@@ -260,7 +261,7 @@ class _ShowHideScreenState extends State<ShowHideScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        provider.resumeGenerator();
+                        provider.resumeGenerator(userData);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(

@@ -30,6 +30,12 @@ class CompositeShowHideField extends StatelessWidget {
       case DataFields.experiences:
         category = "Experiences";
         break;
+      case DataFields.awards:
+        category = "Awards";
+        break;
+      case DataFields.languages:
+        category = "Languages";
+        break;
       default:
         category = "";
     }
@@ -70,6 +76,12 @@ class CompositeShowHideField extends StatelessWidget {
                       currentValue =
                           (fieldValues[index] as Experience).jobTitle;
 
+                      break;
+                    case DataFields.languages:
+                      currentValue = (fieldValues[index]);
+                      break;
+                    case DataFields.awards:
+                      currentValue = fieldValues[index];
                       break;
                     default:
                       currentValue = "";

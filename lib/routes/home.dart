@@ -1,68 +1,100 @@
-import 'dart:io';
-import 'dart:typed_data';
 
-import 'package:cv_builder/models/education.dart';
-import 'package:cv_builder/models/experience.dart';
-import 'package:cv_builder/models/user_data.dart';
-import 'package:cv_builder/services/cv_generator.dart';
+import 'package:cv_builder/routes/add_info.dart';
+import 'package:cv_builder/routes/show_hide_screen.dart';
+import 'package:cv_builder/routes/sign_in.dart';
+import 'package:cv_builder/routes/sign_up.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../models/skill.dart';
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('CV Builder'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.help),
-            onPressed: () {},
+      body: Stack(children: [
+        Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/img.png"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Welcome to CV Builder!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                CVGenerator cvgenerator = CVGenerator();
-              },
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: const Text(
-                'Create a New CV',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'View My CVs',
-                style: TextStyle(
-                  fontSize: 18,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-          ],
         ),
-      ),
+        Positioned(
+          bottom: 360,
+          left: 100,
+          child: Container(
+            alignment:
+            Alignment.lerp(Alignment.topCenter, Alignment.center, .9),
+            width: 163.64,
+            height: 119.17,
+            decoration: const BoxDecoration(
+              // image: DecorationImage(
+              //   image: AssetImage("assets/images/profile.jpg"),
+              //   fit: BoxFit.cover,
+              // ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 110,
+          left: 65,
+          child: Container(
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => AddScreen()));
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xffEC6454),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                width: 275,
+                height: 48,
+                child: const Center(
+                  child: Text(
+                    'Edit your Information',
+                    textScaleFactor: 1,
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 50,
+          left: 65,
+          child: Container(
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => const ShowHideScreen()));
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xff2E3046),
+                  boxShadow: [
+                    BoxShadow(color: Color(0xffFEFEFE), spreadRadius: 1),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                width: 275,
+                height: 48,
+                child: const Center(
+                  child: Text(
+                    'Create CV',
+                    textScaleFactor: 1,
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

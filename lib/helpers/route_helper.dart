@@ -11,7 +11,7 @@ class RouteHelper {
       case onBoardingRoute:
         return MaterialPageRoute(builder: (context) => OnboardingScreen());
       case homeRoute:
-        return MaterialPageRoute(builder: (context) => const HomeScreen());
+        return MaterialPageRoute(builder: (context) => const Home());
       default:
         return MaterialPageRoute(builder: (context) => const _UnKnownRoute());
     }

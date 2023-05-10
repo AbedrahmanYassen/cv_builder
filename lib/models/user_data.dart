@@ -5,7 +5,7 @@ import 'award.dart';
 import 'experience.dart';
 
 class UserData {
-  late String name = "";
+  String name = "";
 
   String currentPosition = "";
   String city = "";

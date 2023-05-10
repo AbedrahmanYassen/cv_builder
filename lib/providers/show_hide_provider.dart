@@ -121,9 +121,9 @@ class ShowHideProvider with ChangeNotifier {
     return userData;
   }
 
-  Future<void> resumeGenerator() async {
+  Future<void> resumeGenerator(UserData data) async {
     CVGenerator cvGenerator = CVGenerator();
-    Uint8List result = await cvGenerator.generateGoogleDocsLikeResume(userData);
+    Uint8List result = await cvGenerator.generateGoogleDocsLikeResume(data);
     File file = File("example.pdf");
     file.writeAsBytes(result);
   }
