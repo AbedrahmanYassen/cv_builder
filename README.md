@@ -1,16 +1,19 @@
 # CV builder
 
-A new Flutter project.
+- This is a Flutter app for android and windows to help jop seekers to build their own CVs effortlessly by just selecting Information has been enterted previously.
 
-## Getting Started
+- This project is incomplete in "alpha" phase, or less if there is less than alpha.
 
-This project is a starting point for a Flutter application.
+- This app, we have built for the "Software Engineering" course to apply all the knowledge and skills we've acquired from the course from:
 
-A few resources to get you started if this is your first Flutter project:
+  1. Gathering the requirements: Creating scenario's and user stories.
+  2. Design.
+  3. Testing.
+  4. Refactoring. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter team:
+ 1. @khaledjendeya2020
+ 2. @AbdArahman2001
+ 
+ 
+ 
