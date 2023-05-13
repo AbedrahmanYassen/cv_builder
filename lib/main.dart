@@ -1,3 +1,4 @@
+import 'package:cv_builder/helpers/route_helper.dart';
 import 'package:cv_builder/routes/add_info.dart';
 import 'package:cv_builder/routes/home.dart';
 import 'package:cv_builder/routes/on_boarding.dart';
@@ -20,12 +21,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Home(),
+    return const MaterialApp(
+
+      onGenerateRoute: RouteHelper.manageRoute,
     );
   }
 }

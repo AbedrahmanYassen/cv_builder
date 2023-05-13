@@ -1,10 +1,10 @@
-
 import 'package:cv_builder/routes/add_info.dart';
 import 'package:cv_builder/routes/show_hide_screen.dart';
 import 'package:cv_builder/routes/sign_in.dart';
 import 'package:cv_builder/routes/sign_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,12 +12,13 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Stack(children: [
         Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/img.png"),
-              fit: BoxFit.cover,
+              fit: BoxFit.fitHeight,
             ),
           ),
         ),
@@ -26,15 +27,15 @@ class Home extends StatelessWidget {
           left: 100,
           child: Container(
             alignment:
-            Alignment.lerp(Alignment.topCenter, Alignment.center, .9),
+                Alignment.lerp(Alignment.topCenter, Alignment.center, .9),
             width: 163.64,
             height: 119.17,
             decoration: const BoxDecoration(
-              // image: DecorationImage(
-              //   image: AssetImage("assets/images/profile.jpg"),
-              //   fit: BoxFit.cover,
-              // ),
-            ),
+                // image: DecorationImage(
+                //   image: AssetImage("assets/images/profile.jpg"),
+                //   fit: BoxFit.cover,
+                // ),
+                ),
           ),
         ),
         Positioned(
@@ -70,8 +71,8 @@ class Home extends StatelessWidget {
           child: Container(
             child: InkWell(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => const ShowHideScreen()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ShowHideScreen()));
               },
               child: Container(
                 decoration: const BoxDecoration(

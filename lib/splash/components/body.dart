@@ -1,3 +1,4 @@
+import 'package:cv_builder/helpers/route_helper.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 import '../../routes/size_config.dart';
@@ -19,7 +20,7 @@ class _BodyState extends State<Body> {
     },
     {
       "text":
-          "We help people to make cv in unique way ",
+      "We help people to make cv in a unique way ",
       "image": "assets/images/cv2.jpeg"
     },
     {
@@ -27,6 +28,7 @@ class _BodyState extends State<Body> {
       "image": "assets/images/cv3.jpeg"
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,24 +66,27 @@ class _BodyState extends State<Body> {
                         (index) => buildDot(index: index),
                       ),
                     ),
-                    Spacer(flex: 2),
+                    const Spacer(flex: 2),
                     SizedBox(
                         width: double.infinity,
                         height: getProportionateScreenHeight(56),
-                        child: Container(
-                          child:ElevatedButton(
-                            style: const ButtonStyle(
-                              shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30)))),
-                              backgroundColor: MaterialStatePropertyAll<Color>(Colors.deepOrangeAccent),
-
-                            ),
-                            child: const Text('Continue',style: TextStyle(fontSize: 16) ),
-                            onPressed: () {
-                              // ...
-                            },
+                        child: ElevatedButton(
+                          style: const ButtonStyle(
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)))),
+                            backgroundColor: MaterialStatePropertyAll<Color>(
+                                Colors.deepOrangeAccent),
                           ),
+                          child: const Text('Continue',
+                              style: TextStyle(fontSize: 16)),
+                          onPressed: () {
+                            Navigator.of(context).push(RouteHelper.manageRoute(
+                                const RouteSettings(name: RouteHelper.signIn)));
+                          },
                         )),
-                    Spacer(),
+                    const Spacer(),
                   ],
                 ),
               ),
